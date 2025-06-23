@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: wa-automate-bot
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: SUPABASE_URL
+        fromDatabase:
+          name: your-supabase-db
+          property: url
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        fromDatabase:
+          name: your-supabase-db
+          property: service_role
+    buildFilters:
+      paths:
+        - "**/*.js"
+        - package.json
+    dockerfilePath: Dockerfile
