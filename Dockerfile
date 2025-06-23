@@ -4,11 +4,10 @@ WORKDIR /app
 
 COPY . .
 
-# Fix permission issue
-RUN chmod -R 777 /app
+RUN chown -R node:node /app
 
-# Install dependencies
+USER node
+
 RUN npm install
 
-# Start the bot
-CMD ["node", "index.js"]
+CMD ["node", "wa-automate-server.js"]
